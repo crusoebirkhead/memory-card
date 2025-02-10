@@ -11,8 +11,6 @@ export default function PokeCard({
   count,
   setCount,
   addCount,
-  previous,
-  setPrevious,
 }) {
   return (
     <Card sx={{ maxWidth: 450, margin: '10px;', background: 'rgba(58, 125, 204, .9)'}}>

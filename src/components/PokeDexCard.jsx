@@ -12,8 +12,6 @@ export default function PokeDex({
   count,
   setCount,
   addCount,
-  previous,
-  setPrevious,
   shuffle,
   shuffleTarget,
   setShuffleTarget
@@ -127,8 +125,6 @@ export default function PokeDex({
                 count={count}
                 addCount={addCount}
                 setCount={setCount}
-                previous={previous}
-                setPrevious={setPrevious}
                 type={card.type}
                 name={card.name}
                 img={card.img}

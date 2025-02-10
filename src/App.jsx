@@ -8,9 +8,9 @@ import PokeDex from "./components/PokeDexCard";
 function App() {
   const [count, setCount] = useState(0);
   const [bestCount, setBestCount] = useState(0);
-  const [previous, setPrevious] = useState('none');
   const [shuffleTarget, setShuffleTarget] = useState('');
-  
+  const [temp, setTemp] = useState([]);
+
   function shuffle(array) {
     let currentIndex = array.length;
   
@@ -29,17 +29,17 @@ function App() {
 
   //still possible bug here
   function addCount(e) {
-    if (e.target.id != previous){
-      setPrevious(e.target.id)
+    if (!temp.includes(e.target.id)){
+      const newTemp = [...temp, e.target.id]; // Create a new array to trigger re-render
+    setTemp(newTemp); // Update state
+    console.log(newTemp);
       setCount(count + 1);
       shuffle(shuffleTarget)
-      console.log(count)
-      console.log(bestCount)
       if (count >= bestCount){
         setBestCount(bestCount + 1);
       }
     } else {
-      setPrevious('');
+      setTemp([]);
       setBestCount(count)
       setCount(0);
     }
@@ -54,12 +54,12 @@ function App() {
     <>
     {
     bestCount != 8 ? <div>
-        <ScoreBoard count={count} addCount={addCount} setCount={setCount} bestCount={bestCount} previous={previous}/>
-        <PokeDex shuffle={shuffle} shuffleTarget={shuffleTarget} setShuffleTarget={setShuffleTarget} count={count} addCount={addCount} setCount={setCount} previous={previous} setPrevious={setPrevious}/>
+        <ScoreBoard count={count} addCount={addCount} setCount={setCount} bestCount={bestCount} />
+        <PokeDex shuffle={shuffle} shuffleTarget={shuffleTarget} setShuffleTarget={setShuffleTarget} count={count} addCount={addCount} setCount={setCount} />
       </div>
       : 
       <>
-      <ScoreBoard count={count} addCount={addCount} setCount={setCount} bestCount={bestCount} previous={previous}/>
+      <ScoreBoard count={count} addCount={addCount} setCount={setCount} bestCount={bestCount} />
       <h1>
         You win, good memory!
         <button onClick={resetCount} >Reset</button>
